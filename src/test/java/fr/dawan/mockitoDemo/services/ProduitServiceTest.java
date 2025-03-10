@@ -75,15 +75,36 @@ class ProduitServiceTest {
             assertEquals(p.getId(), arg0.getId());
             return null;
         }).when(mockRepository).addProduit(any(Produit.class));
-
         produitService.addProduit(p);
     }
 
+    // On pourrait écrire d'autres tests, en essayant de supprimer un produit qui n'existe pas par exemple
     @Test
     void deleteProduit() {
+        // Arrange
+        Produit produit = new Produit(1, "ProduitTest");
+        // Act
+        produitService.deleteProduit(produit);
+        // Assert
+        verify(mockRepository, times(1)).deleteProduit(produit); // Vérifie que deleteProduit a bien été appelé une fois
     }
 
+
+    // update réussie
     @Test
-    void updateProduit() {
+    void updateProduitOk() {
+        // Arrange
+        Produit produit = new Produit(2, "ProduitTest");
+        // Act
+        produitService.updateProduit(produit);
+        // Assert
+        verify(mockRepository, times(1)).updateProduit(produit); // Vérifie que updateProduit a bien été appelé une fois
     }
+
+    //    Modifier le update en 3 tests -->
+//        - Mise à jour réussie
+//        - Produit non trouvé dans la liste
+//        - Produit passé en param est null, je déclanche une erreur
+
+
 }
