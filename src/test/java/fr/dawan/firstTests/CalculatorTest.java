@@ -93,19 +93,64 @@ class CalculatorTest {
         assertNull(result, "La valeur retournée devrait être null");
     }
 
-    @Test
-    void divide() {
-        // Arrange
-//        Calculator calcultor = new Calculator();
-        int a = 10;
-        int b = 2;
 
-        // Act
-        int result = calculator.divide(a, b);
 
-        // Assert
-        assertEquals(5, result, "la valeur attendue de 10/2 est 5");
+    @Nested
+    class DivideTests {
+        @Test
+        void divide() {
+            // Arrange
+            // Calculator calcultor = new Calculator();
+            int a = 10;
+            int b = 2;
 
+            // Act
+            double result = calculator.divide(a, b);
+
+            // Assert
+            assertEquals(5, result, "la valeur attendue de 10/2 est 5");
+        }
+
+        @Test
+        void testDividePositiveDenominator() {
+//            int a = 6;
+//            int b = 3;
+//
+//            int result = calculator.divide(a, b);
+//
+//            assertEquals(2, result, "valeur attendu de 6/3 = 2");
+
+            // Pour les tests, il est conseillé d'utiliser le code au dessus , et de fonctionner étape par étape
+            // pour que le code soit le plus lisible et compréhensible possible
+            assertEquals(2, calculator.divide(6, 3), "valeur attendu de 6/3 = 2" );
+        }
+
+        @Test
+        void testDivideNegativeDenominator() {
+            assertEquals(-2, calculator.divide(6, -3), "valeur attendu de 6/-3 = -2" );
+        }
+
+        @Test
+        void testDivideByZero() {
+
+            double a = 6;
+            double b = 0;
+
+           ArithmeticException exception = assertThrows(ArithmeticException.class, () -> calculator.divide(a,b));
+
+           assertEquals("La division par zéro est impossible", exception.getMessage());
+        }
+
+        // Test pour division avec dénominateur < 1
+        @Test
+        void testDivideBySmallNUmber() {
+            int a = 6;
+            double b = 0.5;
+
+            double result = calculator.divide(a, b);
+
+            assertEquals(12, result, "resultat attendu de 6/0.5 = 12");
+        }
     }
 
     @Test

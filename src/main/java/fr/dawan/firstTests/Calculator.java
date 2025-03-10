@@ -24,7 +24,12 @@ public class Calculator {
         return returnNull ? null : 42;
     }
 
-    public int divide(int a, int b){
+    public double divide(double a, double b){
+
+        if(b == 0){
+            throw new ArithmeticException("La division par zéro est impossible");
+        }
+
         return a / b;
     }
 
