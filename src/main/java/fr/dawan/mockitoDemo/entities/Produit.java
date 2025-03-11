@@ -1,5 +1,7 @@
 package fr.dawan.mockitoDemo.entities;
 
+import java.util.Objects;
+
 public class Produit {
     private int id;
 
@@ -27,5 +29,19 @@ public class Produit {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produit produit = (Produit) o;
+        return id == produit.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

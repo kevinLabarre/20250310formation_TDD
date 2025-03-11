@@ -5,6 +5,7 @@ import fr.dawan.mockitoDemo.repositories.IProduitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ProduitService {
 
@@ -28,7 +29,25 @@ public class ProduitService {
 
     void deleteProduit(Produit p){repository.deleteProduit(p);}
 
-    void updateProduit(Produit p){repository.updateProduit(p);}
+    void updateProduit(Produit p){
 
+        if (p== null) {
+            throw new NullPointerException("Produit ne peut pas être null");
+        }
+
+        // On fait la verif du 'productNotFound' sur le getAll, car nous n'avons pas de getById
+        List<Produit> produits  = repository.getAll();
+        int index = produits.indexOf(p);
+
+        if(index == -1){
+            throw new NoSuchElementException("Produit non trouvé");
+        }
+
+        repository.updateProduit(p);
+    }
+
+    public Produit findById(int id){
+        return repository.findById(id);
+    }
 
 }

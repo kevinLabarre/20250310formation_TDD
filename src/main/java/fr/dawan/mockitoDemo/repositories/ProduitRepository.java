@@ -4,6 +4,7 @@ import fr.dawan.mockitoDemo.entities.Produit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ProduitRepository implements IProduitRepository {
 
@@ -30,4 +31,14 @@ public class ProduitRepository implements IProduitRepository {
         produits.get(index).setId(p.getId());
         produits.get(index).setDescription(p.getDescription());
     }
+    @Override
+    public Produit findById(int id) {
+        for(Produit p : produits){
+            if(p.getId() == id){
+                return p;
+            }
+        }
+        throw new NoSuchElementException("produit id = " + id + " n'existe pas");
+    }
+
 }

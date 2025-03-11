@@ -14,5 +14,6 @@ public interface IProduitRepository {
 
     void updateProduit(Produit p);
 
+    Produit findById(int id);
 
 }
